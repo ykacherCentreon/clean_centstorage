@@ -140,26 +140,10 @@ help()
    # Display Help
    echo "Cleans monitoring data related to hosts/services from old centreon configurations (not in current configuration) "
    echo
-   echo "Syntax: clean_centreon_storage [-b|h]"
+   echo "Syntax: clean_centreon_storage [h]"
    echo "options:"
-   echo "b     backup the centreon_storage (for exemple in : $DB_DUMP_FILE_PATH) "
    echo "h     Print this Help."
    echo
-}
-
-db_dump(){
-
-    echo -e "Backup of the database 'centreon_storage' in progress..."
-
-    mysqldump -u $DB_USER $DB > $DB_DUMP_FILE_PATH.sql
-
-    if [ $? -ne 0 ]; then
-        echo -e "$(date +%Y-%m-%d-%Hh%Mm%Ss) [ERROR] Backup failed..."
-        exit -1
-    else
-        echo -e "Backup successfully done !"
-        return 0
-    fi
 }
 
 clean(){
@@ -206,23 +190,6 @@ reclaim_space(){
 ############################################################
 ############################################################
 
-# Get the options
-#while getopts ":hb" option; do
- #  case $option in
- #     h) # display Help
-  #       echo "help()"
-  #       exit;;
-   #   b) # display Help
-    #     echo "backup()"
-
-     #    exit;;
-      #\?) # Invalid option
-       #  echo "Error: Invalid option"
-        # exit;;
-   #esac
-#done
-
-#db_dump
 clean
 reclaim_space
 
