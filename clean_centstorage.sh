@@ -175,8 +175,9 @@ reclaim_space(){
         FINAL_SIZE=$(du --block-size=1 $DB_PATH | cut -d "/" -f1)
 
         SAVED_SPACE=$(($ORIGINAL_SIZE-$FINAL_SIZE))
-
-        echo -e "$(numfmt --to=iec-i --suffix=B $SAVED_SPACE) saved"
+	
+	ABS_SAVED_SPACE=${SAVED_SPACE#-}
+        echo -e "$(numfmt --to=iec-i --suffix=B $ABS_SAVED_SPACE) saved"
 
         return 0
      fi
